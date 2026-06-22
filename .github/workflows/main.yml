@@ -39,7 +39,7 @@ jobs:
    # Run as a mlflow project
    - name: Run mlflow project
      run: |
-      mlflow run MLproject
+      mlflow run MLProject --env-manager=local
 
    - name: Set up Git LFS
      run: |

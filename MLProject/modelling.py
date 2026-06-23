@@ -15,7 +15,7 @@ if __name__ == "__main__":
   data = pd.read_csv(file_path)
 
   X_train, X_test, y_train, y_test = train_test_split(
-  data.drop("RainTomorrow", axis=1, inplace=False),
+  data.drop("RainTomorrow", axis=1),
   data["RainTomorrow"],
   random_state=42,
   test_size=0.2

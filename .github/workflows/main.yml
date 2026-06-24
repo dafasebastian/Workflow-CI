@@ -20,10 +20,10 @@ jobs:
    - uses: actions/checkout@v3
 
    # Setup Python 3.12.7
-   - name: Set up Python 3.12.7
+   - name: Set up Python 3.13.13
      uses: actions/setup-python@v4
      with:
-      python-version: "3.12.7"
+      python-version: "3.13.13"
   
    # Check Env Variables
    - name: Check Env
@@ -39,7 +39,7 @@ jobs:
    # Run as a mlflow project
    - name: Run mlflow project
      run: |
-      mlflow run MLProject --env-manager=local
+      mlflow run MLProject
 
    - name: Set up Git LFS
      run: |

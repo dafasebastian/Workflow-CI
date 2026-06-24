@@ -10,8 +10,15 @@ if __name__ == "__main__":
   warnings.filterwarnings("ignore")
   np.random.seed(40)
 
-  file_path = sys.argv[3] if len(sys.argv) > 3 else os.path.join(os.path.dirname(os.path.abspath(__file__)), "cuacaAustralia_preprocessing.csv")
+  file_path = sys.argv[3] if len(sys.argv) > 3 else "MLProject/cuacaAustralia_preprocessing.csv"
+  
+  # Debug - print path yang dipakai
+  print(f"Loading data from: {file_path}")
+  print(f"File exists: {os.path.exists(file_path)}")
+  
   data = pd.read_csv(file_path)
+  print(f"Columns: {data.columns.tolist()}")  # Debug untuk lihat kolom apa aja
+  
   X = data.drop(columns=["RainTomorrow"])
   y = data["RainTomorrow"]
 

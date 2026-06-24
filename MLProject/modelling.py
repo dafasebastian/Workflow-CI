@@ -17,8 +17,7 @@ if __name__ == "__main__":
   y = data["RainTomorrow"]
 
   X_train, X_test, y_train, y_test = train_test_split(
-  if data["RainTomorrow"].notnull().any():
-    X,
+  X,
   y,
   random_state=42,
   test_size=0.2

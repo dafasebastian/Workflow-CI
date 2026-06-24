@@ -19,7 +19,7 @@ jobs:
    # Checks-out your repository under $GITHUB_WORKSPACE
    - uses: actions/checkout@v3
 
-   # Setup Python 3.12.7
+   # Setup Python 3.13.13
    - name: Set up Python 3.13.13
      uses: actions/setup-python@v4
      with:
@@ -39,7 +39,7 @@ jobs:
    # Run as a mlflow project
    - name: Run mlflow project
      run: |
-      mlflow run MLProject
+      mlflow run MLProject --env-manager=local
 
    - name: Set up Git LFS
      run: |

@@ -13,11 +13,13 @@ if __name__ == "__main__":
 
   file_path = sys.argv[3] if len(sys.argv) > 3 else os.path.join(os.path.dirname(os.path.abspath(__file__)), "cuacaAustralia_preprocessing.csv")
   data = pd.read_csv(file_path)
-  X = data.drop(columns=["RainTomorrow"], errors="ignore")
+  X = data.drop(columns=["RainTomorrow"])
   y = data["RainTomorrow"]
 
   X_train, X_test, y_train, y_test = train_test_split(
-  X,y,
+  if data["RainTomorrow"] is not None:
+    X,
+  y,
   random_state=42,
   test_size=0.2
   )

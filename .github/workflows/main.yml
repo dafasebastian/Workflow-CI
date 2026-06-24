@@ -9,7 +9,7 @@ on:
    - master
 
 env:
- CSV_URL: "MLProject/cuacaAustralia_preprocessing.csv"
+ CSV_URL: "MLProject/cuacaAustraliag.csv"
 
 jobs:
  build:

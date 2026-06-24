@@ -1,3 +1,4 @@
+import mlflow
 import pandas as pd
 from sklearn.ensemble import RandomForestClassifier
 from sklearn.model_selection import train_test_split
@@ -18,7 +19,7 @@ if __name__ == "__main__":
   
   data = pd.read_csv(file_path)
   print(f"Columns: {data.columns.tolist()}")  # Debug untuk lihat kolom apa aja
-  
+
   X = data.drop(columns=["RainTomorrow"])
   y = data["RainTomorrow"]
 

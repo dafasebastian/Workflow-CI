@@ -30,6 +30,12 @@ jobs:
      run: |
       echo $CSV_URL
 
+   # ADD THIS STEP - Pull Git LFS files
+   - name: Checkout LFS objects
+     run: |
+       git lfs install
+       git lfs pull
+
    # Install mlflow
    - name: Install dependencies
      run: |

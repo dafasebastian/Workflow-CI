@@ -9,7 +9,7 @@ on:
    - master
 
 env:
- CSV_URL: ${{ secrets.CSV_URL }}
+ CSV_URL: "MLProject/cuacaAustralia_preprocessing.csv"
 
 jobs:
  build:

@@ -49,19 +49,20 @@ jobs:
 
    - name: Set up Git LFS
      run: |
-      git config --global user.name ${{ secrets.USERNAME }}
-      git config --global user.email ${{ secrets.EMAIL }}
-      git lfs install
-      git lfs track "mlruns/**"
-      git add .gitattributes
-      git commit -m "Track large files in mlruns with Git LFS" || true
-      git push https://x-access-token:${{ secrets.GITHUB_TOKEN }}@github.com/${{ github.repository }}.git master || true
+       git config --global user.name "GitHub Actions"
+       git config --global user.email "actions@github.com"
+       git lfs install
+       git lfs track "mlruns/**"
+       git add .gitattributes
+       git commit -m "Track large files in mlruns with Git LFS" || true
+       git pull origin master --rebase || true
+       git push https://x-access-token:${{ secrets.GITHUB_TOKEN }}@github.com/${{ github.repository }}.git master || true
 
-   # Save models to GitHub Repository
    - name: Save mlruns to repo
      run: |
-      git config --global user.name ${{ secrets.USERNAME }}
-      git config --global user.email ${{ secrets.EMAIL }}
-      git add -f mlruns/
-      git commit -m "Save mlruns from CI run" || true
-      git push https://x-access-token:${{ secrets.GITHUB_TOKEN }}@github.com/${{ github.repository }}.git master || true
+       git config --global user.name "GitHub Actions"
+       git config --global user.email "actions@github.com"
+       git add -f mlruns/
+       git commit -m "Save mlruns from CI run" || true
+       git pull origin master --rebase || true
+       git push https://x-access-token:${{ secrets.GITHUB_TOKEN }}@github.com/${{ github.repository }}.git master || true

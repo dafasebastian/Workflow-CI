@@ -22,7 +22,7 @@ jobs:
 
    # Setup Python 3.13.13
    - name: Set up Python 3.13.13
-     uses: actions/setup-python@v4
+     uses: actions/setup-python@v3
      with:
       python-version: "3.13.13"
   
@@ -51,7 +51,7 @@ jobs:
    # mencari run_id terbaru dari direktori mlruns/0/ dan menyimpannya sebagai variabel lingkungan baru bernama RUN_ID
    - name: Get latest MLflow run_id
      run: |
-       RUN_ID=$(ls -td 0/models/*/ | head -n 1 | cut -d'/' -f3)
+       RUN_ID=$(ls -td mlruns/0/models/*/ | head -n 1 | cut -d'/' -f3)
        echo "RUN_ID=$RUN_ID" >> $GITHUB_ENV
        echo "Latest run_id: $RUN_ID"
 

@@ -58,7 +58,7 @@ jobs:
    # memastikan model yang telah dilatih dapat dikemas dalam container yang siap untuk diterapkan
    - name: Build Docker Model
      run: |
-       mlflow models build-docker --model-uri "mlruns/0/$RUN_ID/artifacts" --name "tes_docker"
+       mlflow models build-docker --model-uri "mlruns/0/models/$RUN_ID/artifacts/" --name "tes_docker"
 
    # akses untuk mengelola repositori Docker
    - name: Log in to Docker Hub

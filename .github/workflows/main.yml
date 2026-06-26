@@ -75,7 +75,7 @@ jobs:
    # mengunggah image Docker ke Docker Hub
    - name: Push Docker Image
      run: |
-       docker push ${{ secrets.DOCKER_HUB_USERNAME }}/cc:latest
+       docker push ${{ secrets.DOCKER_HUB_USERNAME }}/tes_docker:latest
 
    # - name: Set up Git LFS
    #   run: |

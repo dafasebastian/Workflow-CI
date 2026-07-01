@@ -55,44 +55,22 @@ jobs:
        echo "RUN_ID=$RUN_ID" >> $GITHUB_ENV
        echo "Latest run_id: $RUN_ID"
 
-   # memastikan model yang telah dilatih dapat dikemas dalam container yang siap untuk diterapkan
-   - name: Build Docker Model
+   - name: Set up Git LFS
      run: |
-       mlflow models build-docker --model-uri "mlruns/0/models/$RUN_ID/artifacts/" --name "tes_docker"
+       git config --global user.name ${{ secrets.USERNAME }}
+       git config --global user.email ${{ secrets.EMAIL }}
+       git lfs install
+       git lfs track "mlruns/**"
+       git add .gitattributes
+       git commit -m "Track large files in mlruns with Git LFS" || true
+       git pull origin master --rebase || true
+       git push https://x-access-token:${{ secrets.GITHUB_TOKEN }}@github.com/${{ github.repository }}.git master || true
 
-   # akses untuk mengelola repositori Docker
-   - name: Log in to Docker Hub
-     uses: docker/login-action@v2
-     with:
-       username: ${{ secrets.DOCKER_HUB_USERNAME }}
-       password: ${{ secrets.DOCKER_HUB_ACCESS_TOKEN }}
-
-   # menandai image Docker yang telah dibuat agar sesuai dengan nama pengguna Docker Hub
-   - name: Tag Docker Image
+   - name: Save mlruns to repo
      run: |
-       docker tag tes_docker ${{ secrets.DOCKER_HUB_USERNAME }}/tes_docker:latest
-
-   # mengunggah image Docker ke Docker Hub
-   - name: Push Docker Image
-     run: |
-       docker push ${{ secrets.DOCKER_HUB_USERNAME }}/tes_docker:latest
-
-   # - name: Set up Git LFS
-   #   run: |
-   #     git config --global user.name ${{ secrets.USERNAME }}
-   #     git config --global user.email ${{ secrets.EMAIL }}
-   #     git lfs install
-   #     git lfs track "mlruns/**"
-   #     git add .gitattributes
-   #     git commit -m "Track large files in mlruns with Git LFS" || true
-   #     git pull origin master --rebase || true
-   #     git push https://x-access-token:${{ secrets.GITHUB_TOKEN }}@github.com/${{ github.repository }}.git master || true
-
-   # - name: Save mlruns to repo
-   #   run: |
-   #     git config --global user.name ${{ secrets.USERNAME }}
-   #     git config --global user.email ${{ secrets.EMAIL }}
-   #     git add -f mlruns/
-   #     git commit -m "Save mlruns from CI run" || true
-   #     git pull origin master --rebase || true
-   #     git push https://x-access-token:${{ secrets.GITHUB_TOKEN }}@github.com/${{ github.repository }}.git master || true
+       git config --global user.name ${{ secrets.USERNAME }}
+       git config --global user.email ${{ secrets.EMAIL }}
+       git add -f mlruns/
+       git commit -m "Save mlruns from CI run" || true
+       git pull origin master --rebase || true
+       git push https://x-access-token:${{ secrets.GITHUB_TOKEN }}@github.com/${{ github.repository }}.git master || true
